@@ -61,6 +61,17 @@ export default defineConfig((ctx) => {
       // distDir
 
       // extendViteConf (viteConf) {},
+      extendViteConf(viteConf) {
+        viteConf.define = {
+          ...viteConf.define,
+          global: 'globalThis',
+        };
+        // Polyfill for crypto.hash issue
+        viteConf.optimizeDeps = {
+          ...viteConf.optimizeDeps,
+          include: ['crypto'],
+        };
+      },
       // viteVuePluginOptions: {},
 
       vitePlugins: [
